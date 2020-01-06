@@ -30,13 +30,12 @@ class LoginPage(SeleniumDriver):
 
     def login(self, email="", password=""):
         self.clickLoginLink()
-        self.clearFields()
         self.enterEmail(email)
         self.enterPassword(password)
         self.clickLoginButton()
 
     def verifyLoginSuccessful(self):
-        result = self.isElementPresent("//*[@id='navbar']//span[text()='User Settings']",
+        result = self.isElementPresent("//*[@id='navbar']//span[text()='Test User']",
                                        locatorType="xpath")
         return result
 
@@ -45,8 +44,8 @@ class LoginPage(SeleniumDriver):
                                        locatorType="xpath")
         return result
 
-    def clearFields(self):
-        emailField = self.getElement(locator=self._email_field)
-        emailField.clear()
-        passwordField = self.getElement(locator=self._password_field)
-        passwordField.clear()
+    def verifyTitle(self):
+        if "Google" in self.getTitle():
+            return True
+        else:
+            return False
